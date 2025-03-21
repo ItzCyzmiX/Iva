@@ -1,48 +1,48 @@
-# 🤖 Iva - AI-Powered File Generator
+# 🤖 Iva - AI Code Assistant
 
-Iva is an intelligent code assistant that helps you generate file structures and boilerplate code based on natural language descriptions.
+Iva is an intelligent code assistant that helps you generate file structures and code based on natural language descriptions.
 
-## ✨ Features
+## Features
 
--   Natural language processing for code generation
--   Interactive command-line interface with rich formatting
--   Progress indicators and visual feedback
--   Flexible output directory selection
--   Cross-platform compatibility
+- Generate code and project structures from natural language descriptions
+- Interactive CLI with rich formatting
+- Smart bug fixing capabilities
+- Project scaffolding
+- Cross-platform support
 
-## 🚀 Installation
+## Installation
 
-1. Clone the repository
-
+1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/iva.git
-cd iva
+git clone https://github.com/ItzCyzmiX/Iva.git
+cd Iva
 ```
 
-2. Install dependencies
-
+2. Install the package:
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
-## 💻 Usage
+## Usage
 
-Run the main script:
-
+Run the assistant:
 ```bash
-python main.py
+iva
 ```
 
-Then follow the interactive prompts:
+Or import in your code:
+```python
+from iva_generator import AIFileGenerator
 
-1. Enter your request in natural language
-2. Specify the output directory (or press Enter for current directory)
-3. Wait for the generation process to complete
-
-## 📝 Example
-
-```bash
-What would you like me to do? Create a basic Flask API with authentication
-Output directory: ./my_project
-✅ Files generated successfully!
+generator = AIFileGenerator()
+generator.run("Create a Flask API")
 ```
+
+## Requirements
+
+- Python 3.8+
+- Dependencies listed in requirements.txt
+
+## License
+
+MIT License
