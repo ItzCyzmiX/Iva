@@ -13,6 +13,7 @@ Iva is a powerful AI-powered code assistant that helps developers generate code 
 -   🔧 Smart code generation and bug fixing
 -   📁 Project scaffolding for various frameworks
 -   🌐 Cross-platform support
+-   🤖 Support for multiple LLM models 
 
 ## 📦 Installation
 

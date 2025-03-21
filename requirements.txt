@@ -3,3 +3,4 @@ langchain-community
 langchain-groq
 python-dotenv
 pydantic
+pick>=2.2.0

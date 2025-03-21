@@ -8,10 +8,45 @@ from .templates.prompts import creation_template, bug_fix_template
 from dotenv import load_dotenv
 
 load_dotenv()
-# Create the LLM
+
+# Available models configuration
+AVAILABLE_MODELS = {
+    "qwen-2.5-coder-32b": {
+        "description": "High performance coding model (default)",
+        "temperature": 0.2
+    },
+    "mixtral-8x7b-32768": {
+        "description": "Large context window model",
+        "temperature": 0.3
+    },
+    "llama-3.3-70b-versatile": {
+        "description": "General purpose model",
+        "temperature": 0.2
+    }, 
+    "gemma2-9b-it": {
+        "description": "Optimized instruction-following model",
+        "temperature": 0.3
+    },
+    "llama-3.2-3b-preview": {
+        "description": "Fast lightweight model",
+        "temperature": 0.4
+    },
+    "deepseek-r1-distill-llama-70b": {
+        "description": "Knowledge-focused model",
+        "temperature": 0.2
+    },
+    "qwen-qwq-32b": {
+        "description": "Experimental creative model",
+        "temperature": 0.5
+    }
+}
+
+DEFAULT_MODEL = "qwen-2.5-coder-32b"
+
+# Create the LLM with default model
 llm = ChatGroq(
-    model="qwen-2.5-coder-32b",
-    temperature=0.2,
+    model=DEFAULT_MODEL,
+    temperature=AVAILABLE_MODELS[DEFAULT_MODEL]["temperature"],
 )
 
 # Create the parser
@@ -29,11 +64,46 @@ bug_fix_prompt = ChatPromptTemplate.from_template(
 )
 
 class AIFileGenerator:
-    def __init__(self, llm=llm, creation_prompt=creation_prompt, bug_fix_prompt=bug_fix_prompt, parser=parser):
-        self.llm = llm
+    DEFAULT_MODEL = DEFAULT_MODEL
+    
+    @staticmethod
+    def get_models():
+        """Get available models configuration"""
+        return AVAILABLE_MODELS
+
+    def __init__(self, model_name=DEFAULT_MODEL, llm=llm, creation_prompt=creation_prompt, bug_fix_prompt=bug_fix_prompt, parser=parser):
+        self.model_name = model_name
+        self.llm = ChatGroq(
+            model=model_name,
+            temperature=AVAILABLE_MODELS[model_name]["temperature"]
+        ) if model_name != DEFAULT_MODEL else llm
         self.creation_prompt = creation_prompt
         self.bug_fix_prompt = bug_fix_prompt
         self.parser = parser
+
+    @staticmethod
+    def list_available_models():
+        """List all available models with their descriptions"""
+        print("\nAvailable models:")
+        for model_name, info in AVAILABLE_MODELS.items():
+            print(f"- {model_name}")
+            print(f"  Description: {info['description']}")
+            # print(f"  Temperature: {info['temperature']}")
+            if model_name == DEFAULT_MODEL:
+                print("  (Default model)")
+            print()
+
+    def set_model(self, model_name):
+        """Change the model being used"""
+        if model_name not in AVAILABLE_MODELS:
+            raise ValueError(f"Model {model_name} not available. Use list_available_models() to see available models.")
+        
+        self.model_name = model_name
+        self.llm = ChatGroq(
+            model=model_name,
+            temperature=AVAILABLE_MODELS[model_name]["temperature"]
+        )
+        return self
         
     def generate_structure(self, user_request):
         """Generate a directory structure based on user request"""
