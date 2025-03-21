@@ -1,4 +1,4 @@
-# 🤖 Iva - AI-Powered File Generator
+# 🤖 Iva - AI-Powered Copilot
 
 Iva is an intelligent code assistant that helps you generate file structures and boilerplate code based on natural language descriptions.
 
