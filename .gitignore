@@ -1,7 +1,4 @@
 .env
-/__pycache__/
 /.vscode/
 /.venv/ 
-src/__pycache__/
-src/models/__pycache__/
-src/templates/__pycache__/
+**/__pycache__/
